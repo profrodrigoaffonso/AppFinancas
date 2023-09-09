@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Financas</string>
+    <string-array name="categorias_array">
+        <item></item>
+        <item>Alimentação</item>
+        <item>Moradia</item>
+        <item>Vestuário</item>
+        <item>Lazer</item>
+        <item>Educação</item>
+        <item>Transporte</item>
+        <item>Mercado</item>
+        <item>Saúde</item>
+        <item>Outros</item>
+    </string-array>
+    <string-array name="pagamentos_array">
+        <item></item>
+        <item>Dinheiro</item>
+        <item>Pix</item>
+        <item>Débito</item>
+        <item>Crédito</item>
+        <item>Boleto</item>
+    </string-array>
+</resources>
