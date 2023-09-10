@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
                 valor.setText("");
                 obs.setText("");
-
+                categorias.setSelection(0);
+                forma_pagamentos.setSelection(0);
             }
         });
     }
