@@ -1,5 +1,7 @@
 package com.example.financas;
 
+import static java.security.AccessController.getContext;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -35,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
         final EditText valor = findViewById(R.id.valor);
         final EditText obs = findViewById(R.id.obs);
 
+
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Object categoria = categorias.getSelectedItem();
                 String str_categoria = String.valueOf(categoria);
+                String resposta = null;
 
                 Object forma_pagamento = forma_pagamentos.getSelectedItem();
                 String str_forma_pagamento = String.valueOf(forma_pagamento);
@@ -47,12 +51,17 @@ public class MainActivity extends AppCompatActivity {
                 Editable valor_pagamento = valor.getText();
                 Editable valor_obs = obs.getText();
 
-                sendRequest("https://profrodrigoaffonso.com.br/api/financas", str_categoria, str_forma_pagamento, valor_pagamento.toString(), valor_obs.toString());
+                resposta = sendRequest("https://profrodrigoaffonso.com.br/api/financas", str_categoria, str_forma_pagamento, valor_pagamento.toString(), valor_obs.toString());
 
-                valor.setText("");
-                obs.setText("");
-                categorias.setSelection(0);
-                forma_pagamentos.setSelection(0);
+                Toast.makeText(getApplicationContext(), resposta, Toast.LENGTH_LONG).show();
+
+                if(resposta.equals("Salvo com sucesso!")){
+                    valor.setText("");
+                    obs.setText("");
+                    categorias.setSelection(0);
+                    forma_pagamentos.setSelection(0);
+                }
+
             }
         });
     }
@@ -92,12 +101,12 @@ public class MainActivity extends AppCompatActivity {
             BufferedReader reader = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
             while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+                sb.append(line);
             }
             // Response from server after login process will be stored in response variable.
             response = sb.toString();
             // You can perform UI operations here
-            Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
             isr.close();
             reader.close();
 
